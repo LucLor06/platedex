@@ -19,7 +19,8 @@ class User(AbstractUser):
             return
         uidb64 = urlsafe_base64_encode(force_bytes(self.pk))
         token = default_token_generator.make_token(self)
-        link = reverse_lazy('accounts-email-verify-confirm', kwargs={'uidb64': uidb64, 'token': token})
+        # link = reverse_lazy('accounts-email-verify-confirm', kwargs={'uidb64': uidb64, 'token': token})
+        link = 'placeholder'
         send_mail(
             subject='Verify Your Email',
             message=link,
