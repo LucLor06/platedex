@@ -21,7 +21,7 @@ class RegisterForm(UserCreationForm):
 class EmailVerificationForm(forms.Form):
     email = forms.EmailField()
 
-    def clean_email(self):
+    def send_verification_email(self):
         email = self.cleaned_data['email']
         try:
             user = User.objects.get(email__iexact=email)
