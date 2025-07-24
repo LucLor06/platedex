@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Verify Email
+{% endblock title %}
+
+{% block content %}
+<section class="single-container__wrapper">
+    <div class="single-container">
+        <div class="single-container__header">
+            <h1 class="text--lg">Verify Email</h1>
+            <p>Fill in the form below to receive an email with instructions on how to verify the email.</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {% include 'forms/form.html' %}
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}
