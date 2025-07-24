@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from config import settings
 
 class User(AbstractUser):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=False)
 
     REQUIRED_FIELDS = ['email']
@@ -19,8 +19,7 @@ class User(AbstractUser):
             return
         uidb64 = urlsafe_base64_encode(force_bytes(self.pk))
         token = default_token_generator.make_token(self)
-        # link = reverse_lazy('accounts-email-verify-confirm', kwargs={'uidb64': uidb64, 'token': token})
-        link = 'placeholder'
+        link = reverse_lazy('accounts-email-verify-confirm', kwargs={'uidb64': uidb64, 'token': token})
         send_mail(
             subject='Verify Your Email',
             message=link,
