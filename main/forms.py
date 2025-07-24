@@ -4,7 +4,7 @@ from .models import User
 
 class RegisterForm(UserCreationForm):
     class Meta:
-        models = User
+        model = User
         fields = ['username', 'email']
 
     def __init__(self, *args, **kwargs):
