@@ -13,5 +13,5 @@ class RegisterForm(UserCreationForm):
 
     def save(self, commit=True):
         if commit:
-            form.instance.send_verification_email()
+            self.instance.send_verification_email()
         return super().save(commit)
