@@ -5,7 +5,8 @@ from django.core.validators import MinLengthValidator
 
 class User(AbstractUser):
     email = models.EmailField()
-
+    is_active = models.BooleanField(default=False)
+    
     REQUIRED_FIELDS = ['email']
 
 
