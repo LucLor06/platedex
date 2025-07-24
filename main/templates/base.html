@@ -24,6 +24,7 @@
     <link rel="canonical" href="{{ request.build_absolute_uri }}" />
 </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        {% include 'navigation.html' %}
         <main>
             {% block content %}
             {% endblock content %}
