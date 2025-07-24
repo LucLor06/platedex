@@ -41,6 +41,10 @@ body {
     min-height: 100vh;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
 
+    &:has(nav) {
+        padding-top: calc(var(--font-size-sm) * 1.5 + 1.125rem);
+    }
+
     &:has(.modal__wrapper:not(.hidden)) {
         overflow: hidden;
     }
