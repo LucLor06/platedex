@@ -1,0 +1,231 @@
+@font-face {
+    font-family: 'Inter';
+    src: url(/static/fonts/Inter.ttf);
+}
+
+:root {
+    --font-family-header: 'Inter';
+    --font-family-body: 'Inter';
+}
+
+h1, h2, h3, h4, h5, p, a, li, sub, input, button, label, span, address, select {
+    margin-block: .5rem;
+    transition: color 500ms, background-color 500ms;
+}
+
+h1, h2, h3, h4, h5, summary {
+    font-family: var(--font-family-header);
+    color: var(--color-text);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.1em;
+}
+
+h1 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: var(--font-size-lg);
+}
+
+h3, summary {
+    font-size: var(--font-size-md);
+}
+
+summary {
+    cursor: pointer;
+    user-select: none;
+}
+
+h4 {
+    font-size: var(--font-size-sm);
+}
+
+p, a, li, sub, span, div, input, button, label, textarea, address, select, .nice-select {
+    font-family: var(--font-family-body);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: 1.5em;
+}
+
+.links {
+    display: flex;
+    flex-flow: row wrap;
+    gap: .5rem;
+}
+
+p, div.links {
+    a {
+        margin: 0;
+        display: inline;
+        font-size: inherit;
+    }
+}
+
+p, li {
+    color: color-mix(in srgb, var(--color-text) 85%, #000000 15%);
+}
+
+p + p {
+    margin-top: 1rem;
+}
+
+b {
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+a {
+    display: block;
+    color: color-mix(in srgb, var(--color-secondary) 50%, var(--color-text) 50%);
+
+    &:hover {
+        color: var(--color-secondary);
+    }
+}
+
+a.button {
+    text-decoration: none;
+}
+
+ul, ol {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+
+    p {
+        margin-block: 0;
+    }
+}
+
+span {
+    margin: 0;
+}
+
+.text--xl {
+    font-size: var(--font-size-xl);
+}
+
+.text--lg {
+    font-size: var(--font-size-lg);
+}
+
+.text--md {
+    font-size: var(--font-size-md);
+}
+
+.text--sm {
+    font-size: var(--font-size-sm);
+}
+
+.text--xs {
+    font-size: var(--font-size-xs);
+}
+
+.text--xxs {
+    font-size: var(--font-size-xxs);
+}
+
+.text--center {
+    text-align: center;
+}
+
+.text--error {
+    color: $color-error;
+    margin-block: 0.25rem;
+}
+
+.text--success {
+    color: $color-success;
+    margin-block: 0.25rem;
+}
+
+.text--secondary {
+    color: var(--color-secondary);
+}
+
+.text--faded {
+    opacity: 0.75;
+}
+
+.tooltip {
+    z-index: 2;
+    width: max-content;
+    margin: 10% auto;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms 0ms;
+    padding: .33rem .66rem;
+    border-radius: .5rem;
+    border: solid 1px var(--color-text);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    hr {
+        width: 100%;
+    }
+
+    &.tooltip--bottom {
+        bottom: unset;
+        top: 100%;
+    }
+
+    p {
+        font-size: var(--font-size-xs);
+        margin: 0;
+    }
+}
+
+.tooltip-container {
+    position: relative;
+    width: fit-content;
+
+    &:hover > .tooltip, &:focus-visible > .tooltip, &:active > .tooltip {
+        opacity: 1;
+        transition: opacity 125ms 0ms;
+    }
+}
+
+.header {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+
+    svg, img {
+        width: var(--header-size);
+        height: var(--color-size);
+    }
+
+    h1, h2, h3, h4, h5, p, a {
+        font-size: var(--header-size);
+    }
+}
+
+.header--sm {
+    --header-size: var(--font-size-sm);
+}
+
+.header--md {
+    --header-size: var(--font-size-md);
+}
+
+.header--lg {
+    --header-size: var(--font-size-lg);
+}
+
+.header--xl {
+    --header-size: var(--font-size-xl);
+}
+
+.header--xxl {
+    --header-size: var(--font-size-xxl)
+}

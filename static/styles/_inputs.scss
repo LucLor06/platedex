@@ -1,0 +1,204 @@
+input, textarea, button, .button, .nice-select {
+    border: 2px solid var(--color-text);
+    border-radius: .5rem;
+    outline: none;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    margin-block: 1rem;
+    gap: .5rem;
+
+    .button {
+        margin: 0;
+    }
+}
+
+button, .button {
+    border-radius: .5rem;
+    padding: .5rem;
+    transition: background-color 250ms, color 250ms;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    user-select: none;
+    --color-background: var(--color-text);
+    --color-fill: var(--color-primary);
+    color: var(--color-fill);
+    background-color: var(--color-background);
+    width: fit-content;
+    border: none;
+    transition: scale 250ms, transform 125ms;
+
+    span {
+        color: var(--color-fill);
+        font-weight: 500;
+    }
+
+    svg, svg path {
+        fill: var(--color-fill);
+        width: var(--font-size-sm);
+        height: var(--font-size-sm);
+    }
+
+    &:hover, &:focus-visible {
+        scale: 1.05;
+    }
+
+    &:active {
+        transform: translateY(0.25rem) scale(0.9);
+    }
+
+    &.button--error {
+        --color-background: var(--color-error);
+        --color-fill: var(--color-text);
+    }
+
+    &.button--success {
+        --color-background: var(--color-success);
+        --color-fill: var(--color-text);
+    }
+
+    &.button--warning {
+        --color-background: var(--color-warning);
+        --color-fill: var(--color-text);
+    }
+}
+
+input[type='text'], input[type='search'], input[type='password'], input[type='email'], input[type='date'], input[type='datetime-local'], textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: .5rem .5rem;
+    resize: none;
+    margin-block: .5rem;
+    min-width: 200px;
+
+    &:focus {
+        background-color: rgba(0, 0, 0, .15);
+    }
+
+    &:focus-visible {
+        border-color: var(--color-secondary);
+        scale: 1.05;
+        outline-color: transparent;
+    }
+}
+
+textarea {
+    width: 100%;
+    margin-inline: auto;
+}
+
+fieldset {
+    border: none;
+}
+
+form, fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+
+    .form__errors {
+        p {
+            color: var(--color-error);
+            font-size: var(--font-size-xxs);
+        }
+    }
+
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        width: 100%;
+
+        input, textarea, button, label, select, .nice-select {
+            margin: 0;
+        }
+
+        .form-field__header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        &:has(input:required, select:required) label::after {
+            content: '*';
+            color: var(--color-secondary);
+        }
+
+        .input--checkbox {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+
+            cursor: pointer;
+        }
+    }
+
+    .help-text {
+        opacity: 0.75;
+        font-size: var(--font-size-xxs);
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+input[type='checkbox'] {
+    display: none;
+
+    & + .checkbox {
+        width: var(--font-size-sm);
+        height: var(--font-size-sm);
+        border: solid 2px var(--color-secondary);
+        border-radius: 0.25rem;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &:checked + .checkbox {
+        background-color: var(--color-secondary);
+    }
+}
+
+.nice-select {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: .5rem .5rem;
+    resize: none;
+    margin-block: .5rem;
+    min-width: 200px;
+    font-family: var(--font-family-body);
+    display: flex;
+    align-items: center;
+
+    .option:hover, .option.focus, .option.selected.focus {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &::after {
+        border-color: var(--color-secondary);
+    }
+
+    &.open {
+        border-color: var(--color-secondary);
+
+    }
+    
+    .nice-select-dropdown {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        border: solid 2px var(--color-secondary);
+
+        ul, li {
+            margin: 0;
+        }
+    }
+}
