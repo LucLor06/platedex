@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from .forms import RegisterForm
+from .forms import RegisterForm, EmailVerificationForm
 from django.shortcuts import redirect
 from .models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -20,6 +20,18 @@ def accounts_register(request:HttpRequest):
         form = RegisterForm()
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
+
+def accounts_email_verify(request):
+    if request.method == "POST":
+        form = EmailVerificationForm(request.POST)
+        if form.is_valid():
+            form.send_verification_email()
+            return redirect('accounts-email-verify-done')
+    else:
+        form = EmailVerificationForm()
+    context = {'form': form}
+    return render(request, 'accounts/email/verify.html', context)
+
 
 def accounts_email_verify_done(request):
     return render(request, 'accounts/email/verify/done.html')
