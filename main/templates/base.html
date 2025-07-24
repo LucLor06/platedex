@@ -1,0 +1,34 @@
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Platedex | Search{% endblock title %}</title>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'logo.png' %}">
+    {% block embeds %}
+    <meta property="og:title" content="Platedex">
+    <meta property="og:description" content="The Platedex is a website where you can log sightings of niche license plates.">
+    {% endblock embeds %}
+    <meta name="theme-color" content="#0A0A0A">
+    <meta name="manifest" content="{% static 'manifest.json' %}"">
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+    {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static '/styles/styles.scss' %}">
+    {% endcompress %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.4/htmx.min.js" integrity="sha512-2kIcAizYXhIn8TzUvqzEDZNuDZ+aW7yE/+f1HJHXFjQcGNfv1kqzJSTBRBSlOgp6B/KZsz1K0a3ZTqP9dnxioQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hyperscript/0.9.14/_hyperscript.min.js" integrity="sha512-l43sZzpnAddmYhJyfPrgv46XhJvA95gsA28/+eW4XZLSekQ8wlP68i9f22KGkRjY0HNiZrLc5MXGo4z/tM2QNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="canonical" href="{{ request.build_absolute_uri }}" />
+</head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer>
+        </footer>
+    </body>
+</html>
