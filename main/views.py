@@ -11,7 +11,7 @@ def accounts_register(request:HttpRequest):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('register')
+            return redirect('accounts-register')
     else:
         form = RegisterForm()
     context = {'form': form}
