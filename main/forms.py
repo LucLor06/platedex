@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+from django import forms
 
 
 class RegisterForm(UserCreationForm):
@@ -15,3 +16,15 @@ class RegisterForm(UserCreationForm):
         user = super().save(commit)
         if commit:
             user.send_verification_email()
+
+
+class EmailVerificationForm(forms.Form):
+    email = forms.EmailField()
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try:
+            user = User.objects.get(email__iexact=email)
+            user.send_verification_email()
+        except User.DoesNotExist:
+            pass
