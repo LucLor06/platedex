@@ -1,0 +1,16 @@
+__pycache__
+
+static/CACHE
+
+static/admin
+
+media/
+
+.env
+
+db.sqlite3
+
+cache/
+
+backups/
+
