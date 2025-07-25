@@ -73,3 +73,7 @@ class AccountsPasswordResetConfirmView(PasswordResetConfirmView):
     post_reset_login = False
     success_url = reverse_lazy('accounts-password-reset-complete')
     form_class = SetPasswordForm
+
+
+class AccountsPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'accounts/password/reset/complete.html'
