@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from .forms import RegisterForm, EmailVerificationForm
+from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from .models import User
@@ -66,3 +66,10 @@ class AccountsPasswordResetView(PasswordResetView):
 
 class AccountsPasswordResetDoneView(PasswordResetDoneView):
     template_name = 'accounts/password/reset/done.html'
+
+
+class AccountsPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'accounts/password/reset/confirm.html'
+    post_reset_login = False
+    success_url = reverse_lazy('accounts-password-reset-complete')
+    form_class = SetPasswordForm
