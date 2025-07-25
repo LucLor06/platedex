@@ -23,6 +23,11 @@ def accounts_register(request:HttpRequest):
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
+class LoginView(LoginView):
+    template_name = 'accounts/login.html'
+    success_url = reverse_lazy('home')
+
+
 def accounts_email_verify(request):
     if request.method == "POST":
         form = EmailVerificationForm(request.POST)
