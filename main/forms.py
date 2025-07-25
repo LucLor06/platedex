@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from .models import User
 from django import forms
 
@@ -28,3 +28,10 @@ class EmailVerificationForm(forms.Form):
             user.send_verification_email()
         except User.DoesNotExist:
             pass
+
+    
+class SetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['new_password1'].help_text = 'Minimum 8 characters. Must include letters and numbers.'
+        
