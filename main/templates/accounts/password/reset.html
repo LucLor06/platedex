@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Reset Password
+{% endblock title %}
+
+{% block content %}
+<section class="single-container__wrapper">
+    <div class="single-container">
+        <div class="single-container__header">
+            <h1 class="text--lg">Reset Password</h1>
+            <p>Fill in the form below to receive details on how to reset your password.</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {% include 'forms/form.html' %}
+            <button type="submit">Reset</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}
