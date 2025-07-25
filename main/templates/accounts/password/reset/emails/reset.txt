@@ -1,0 +1,9 @@
+Hi {{ user.get_username }},
+
+You're receiving this email because you requested a password reset for your account.
+
+Please click the link below to choose a new password:
+
+{{ protocol }}://{{ domain }}{% url 'accounts-password-reset-confirm' uidb64=uid token=token %}
+
+If you didn’t request a password reset, you can ignore this email — your password will stay the same.
