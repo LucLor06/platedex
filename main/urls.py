@@ -8,4 +8,5 @@ urlpatterns = [
     path('accounts/email/verify/done/', views.accounts_email_verify_done, name='accounts-email-verify-done'),
     path('accounts/email/verify/<uidb64>/<token>/', views.accounts_email_verify_confirm, name='accounts-email-verify-confirm'),
     path('accounts/password/reset/', views.AccountsPasswordResetView.as_view(), name='accounts-password-reset'),
+    path('accounts/password/reset/done/', views.AccountsPasswordResetDoneView.as_view(), name='accounts-password-reset-done')
 ]
