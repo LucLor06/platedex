@@ -11,6 +11,10 @@ ALLOWED_HOSTS = ['127.0.0.1', environment_variables.PUBLIC_FACING_ADDRESS]
 
 AUTH_USER_MODEL = 'main.User'
 
+LOGIN_URL = 'accounts-login'
+
+LOGIN_REDIRECT_URL = 'home'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' if DEBUG else 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
