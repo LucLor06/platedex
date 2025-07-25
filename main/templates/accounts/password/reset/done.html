@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Password Reset Sent
+{% endblock title %}
+
+{% block content %}
+<section class="single-container__wrapper">
+    <div class="single-container">
+        <h1 class="text--lg">Password Reset Sent</h1>
+        <p>An email has be sent containing details on how to reset your password.</p>
+        <p class="text--xs"><a href="{% url 'accounts-password-reset' %}">Resend Password Reset</a></p>
+    </div>
+</section>
+{% endblock content %}
