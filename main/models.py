@@ -29,7 +29,7 @@ class User(AbstractUser):
 
 
 class LicensePlate(models.Model):
-    number = models.CharField(max_length=7, validators=[MinLengthValidator(2)])
+    number = models.CharField(max_length=7, unique=True, validators=[MinLengthValidator(2)])
     views = models.PositiveBigIntegerField(default=0)
 
     def __str__(self):
