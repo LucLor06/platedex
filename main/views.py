@@ -7,7 +7,7 @@ from .models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 def home(request: HttpRequest):
     return render(request, 'home.html')
@@ -23,10 +23,14 @@ def accounts_register(request:HttpRequest):
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
+
 class LoginView(LoginView):
     template_name = 'accounts/login.html'
     success_url = reverse_lazy('home')
 
+
+class LogoutView(LogoutView):
+    success_url = reverse_lazy('home')
 
 def accounts_email_verify(request):
     if request.method == "POST":
