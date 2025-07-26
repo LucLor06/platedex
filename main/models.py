@@ -37,6 +37,7 @@ class LicensePlate(models.Model):
     
     def save(self, *args, **kwargs):
         if self._state.adding:
+            self.number = self.number.upper()
             self.full_clean()
         return super().save(*args, **kwargs)
 
