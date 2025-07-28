@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from .models import User
+from .models import User, LicensePlate
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
@@ -86,3 +86,11 @@ class AccountsPasswordResetConfirmView(PasswordResetConfirmView):
 
 class AccountsPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'accounts/password/reset/complete.html'
+
+def license_plate_detail(request: HttpRequest, license_plate_number: str):
+    license_plate, created = LicensePlate.objects.get_or_create(number__iexact=license_plate_number, defaults={'number': license_plate_number})
+    if not created:
+        license_plate.views += 1
+        license_plate.save()
+    context = {'license_plate': license_plate}
+    return render(request, 'plates/detail.html', context)
