@@ -52,6 +52,12 @@ button, .button {
         transform: translateY(0.25rem) scale(0.9);
     }
 
+    &.button--outline {
+        --color-background: transparent;
+        --color-fill: var(--color-text);
+        border: var(--color-fill) solid 1px;
+    }
+
     &.button--error {
         --color-background: var(--color-error);
         --color-fill: var(--color-text);

@@ -1,0 +1,28 @@
+.plate__data {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 1rem;
+
+    & > div {
+        min-width: 200px;
+
+        p, h3 {
+            text-align: center;
+            margin: 0;
+        }
+
+        p {
+            color: color-mix(in srgb, var(--color-text) 50%, var(--color-primary) 50%);
+        }
+
+        h3 {
+            font-size: var(--font-size-lg);
+        }
+    }
+}
+
+.plate__number {
+    font-size: var(--font-size-xxl);
+}
