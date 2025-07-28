@@ -10,13 +10,13 @@
 html {
     background: linear-gradient(
         to top right,
-        color-mix(in srgb, var(--color-secondary) 20%, var(--color-primary) 80%) 0%,
-        color-mix(in srgb, var(--color-secondary) 15%, var(--color-primary) 85%) 15%,
-        color-mix(in srgb, var(--color-secondary) 10%, var(--color-primary) 90%) 30%,
+        color-mix(in srgb, var(--color-secondary) 15%, var(--color-primary) 85%) 0%,
+        color-mix(in srgb, var(--color-secondary) 10%, var(--color-primary) 90%) 15%,
+        color-mix(in srgb, var(--color-secondary) 5%, var(--color-primary) 95%) 30%,
         var(--color-primary) 50%,
-        color-mix(in srgb, var(--color-secondary) 10%, var(--color-primary) 90%) 70%,
-        color-mix(in srgb, var(--color-secondary) 15%, var(--color-primary) 85%) 85%,
-        color-mix(in srgb, var(--color-secondary) 20%, var(--color-primary) 80%) 100%
+        color-mix(in srgb, var(--color-secondary) 5%, var(--color-primary) 95%) 70%,
+        color-mix(in srgb, var(--color-secondary) 10%, var(--color-primary) 90%) 85%,
+        color-mix(in srgb, var(--color-secondary) 15%, var(--color-primary) 85%) 100%
     );
     background-color: var(--color-primary);
 }

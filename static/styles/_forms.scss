@@ -82,7 +82,7 @@ input[type='text'], input[type='search'], input[type='password'], input[type='em
     min-width: 200px;
 
     &:focus {
-        background-color: rgba(0, 0, 0, .15);
+        background-color: rgba(0, 0, 0, .05);
     }
 
     &:focus-visible {
@@ -207,4 +207,9 @@ input[type='checkbox'] {
             margin: 0;
         }
     }
+}
+
+:is(button, .button):disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
