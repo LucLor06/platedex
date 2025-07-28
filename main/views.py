@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm
+from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm, LicensePlateNumberForm
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import User, LicensePlate
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_str
@@ -10,6 +10,11 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 def home(request: HttpRequest):
+    if 'number' in request.GET:
+        form = LicensePlateNumberForm(data=request.GET)
+        if form.is_valid():
+            plate_number = form.cleaned_data['number'].upper()
+            return redirect(reverse('license-plate-detail', kwargs={'license_plate_number': plate_number}))
     return render(request, 'home.html')
 
 def accounts_register(request:HttpRequest):
