@@ -12,7 +12,7 @@ end" hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML swap:1
         </div>
         <div class="nav__links">
             {% if user.is_authenticated %}
-            {% with 'logout' as url_name %}
+            {% with 'accounts-logout' as url_name %}
             <form method="post" action="{% url url_name %}">
                 {% csrf_token %}
                 <button type="submit">Logout</button>
@@ -41,7 +41,7 @@ end" hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML swap:1
             </a>
             <hr class="section-divider">
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">
+            <a href="{% url 'accounts-logout' %}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
                 <span>Logout</span>
             </a>
