@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
-from .models import User
+from .models import User, LicensePlate
 from django import forms
 
 
@@ -35,3 +35,8 @@ class SetPasswordForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         self.fields['new_password1'].help_text = 'Minimum 8 characters. Must include letters and numbers.'
         
+
+class LicensePlateNumberForm(forms.ModelForm):
+    class Meta:
+        model = LicensePlate
+        fields = ['number']
