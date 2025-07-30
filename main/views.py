@@ -1,23 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm, LicensePlateNumberForm
+from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm, LicensePlateNumberForm, LicensePlateImageValidationForm
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from .models import User, LicensePlate
+from .models import User, LicensePlate, LicensePlateSighting
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def home(request: HttpRequest):
     if 'number' in request.GET:
         form = LicensePlateNumberForm(data=request.GET)
         if form.is_valid():
-            plate_number = form.cleaned_data['number'].upper()
-            return redirect(reverse('license-plate-detail', kwargs={'license_plate_number': plate_number}))
+            plate_number = form.cleaned_data['number']
+            return redirect(reverse('license-plates-detail', kwargs={'license_plate_number': plate_number}))
     return render(request, 'home.html')
 
-def accounts_register(request:HttpRequest):
+def accounts_register(request: HttpRequest):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -92,10 +94,28 @@ class AccountsPasswordResetConfirmView(PasswordResetConfirmView):
 class AccountsPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'accounts/password/reset/complete.html'
 
-def license_plate_detail(request: HttpRequest, license_plate_number: str):
+def license_plates_detail(request: HttpRequest, license_plate_number: str):
     license_plate, created = LicensePlate.objects.get_or_create(number__iexact=license_plate_number, defaults={'number': license_plate_number})
     if not created:
         license_plate.views += 1
         license_plate.save()
     context = {'license_plate': license_plate}
     return render(request, 'plates/detail.html', context)
+
+@login_required
+def sightings_create(request: HttpRequest, license_plate_number: str):
+    license_plate, created = LicensePlate.objects.get_or_create(number__iexact=license_plate_number, defaults={'number': license_plate_number})
+    license_plate_redirect = reverse('license-plates-detail', kwargs={'license_plate_number': license_plate.number})
+    if request.method == "POST":
+        form = LicensePlateImageValidationForm(instance=license_plate, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            sighting = LicensePlateSighting.objects.create(user=request.user, license_plate=license_plate)
+            messages.add_message(request, messages.SUCCESS, 'Congrats! Your sighting has been added.', extra_tags='modal')
+            return redirect(license_plate_redirect)
+    else:
+        if LicensePlateSighting.objects.filter(user=request.user, license_plate=license_plate).exists():
+            messages.add_message(request, messages.ERROR, 'You have already seen this plate!', extra_tags='modal')
+            return redirect(license_plate_redirect)
+        form = LicensePlateImageValidationForm()
+    context = {'form': form, 'license_plate': license_plate}
+    return render(request, 'plates/detail/sightings/add.html', context)
