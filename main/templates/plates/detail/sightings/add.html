@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ plate.number }} | Add Sighting
+{% endblock title %}
+
+{% block content %}
+<section class="single-container__wrapper">
+    <div class="single-container">
+        <div class="single-container__header">
+            <h1 class="text--lg">Add Sighting</h1>
+            <p><b>Directions: </b>Upload a photo of the license plate that matches the text "{{ license_plate.number }}"</p>
+        </div>
+        <p>Validation is handled via AI and can sometimes be faulty. Ensure the picture is as clear as possible, crop out unnecessary text if need be. For further clarity you can also edit out certain marks like icons or other items on the plate.</p>
+            <p>If you would like to have your image manually verified, feel free to send it to <a href="mailto:platedex@gmail.com">platedex@gmail.com</a>. Include your username, the plate number, and the image. Please keep in mind it may take some time to get to your request.</p>
+            <p>For privacy and potentially legal compliance, images are deleted immediately after validation.</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'forms/form.html' %}
+            <button class="button">
+                <span>Verify</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/></svg>
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock content %}
