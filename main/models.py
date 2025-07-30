@@ -47,5 +47,10 @@ class LicensePlateSighting(models.Model):
     seen_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('main.User', related_name='sightings', on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['license_plate', 'user'], name='license_plate_user_unique')
+        ]
+
     def __str__(self):
         return f'{self.user} | {self.license_plate} | {self.seen_on}'
