@@ -9,7 +9,7 @@ Plate | {{ license_plate.number }}
     <h1 class="plate__number">{{ license_plate.number }}</h1>
     <div class="buttons">
         {% if user.is_authenticated %}
-        <a class="button">
+        <a class="button" href="{% url 'sightings-create' license_plate.number %}">
             <span>Add sighting</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
         </a>
@@ -42,17 +42,18 @@ Plate | {{ license_plate.number }}
         <p>people</p>
     </div>
 </section>
+{% if license_plate.sightings.exists %}
 <hr>
-<section class="cards">
+<section>
     <h2>Recent Sightings</h2>
     <div class="cards">
         {% for sighting in license_plate.sightings.all|slice:3 %}
         <div class="card">
             <div class="card__header">
-                <h3><a href="#">{{ sighting.user.username }}</a></h3>
+                <h3>{{ sighting.seen_on|date:'F j, Y g:i A' }}</h3>
             </div>
             <hr>
-            <p><b>Seen On: </b>{{ sighting.seen_on }}</p>
+            <p><b>Seen By: </b><a href=#>{{ sighting.user }}</a></p>
         </div>
         {% endfor %}
     </div>
@@ -64,4 +65,5 @@ Plate | {{ license_plate.number }}
     </div>
     {% endif %}
 </section>
+{% endif %}
 {% endblock content %}
