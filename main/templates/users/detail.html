@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User | {{ user.username }}
+{% endblock title %}
+
+{% block content %}
+<header>
+    <h1>{{ user.username }}</h1>
+    {% with sightings_count as user.sightings.count %}
+    <p>{{ sightings_coutn }} sightings</p>
+    {% endwith %}
+</header>
+{% if user.sightings.exists %}
+<section>
+    <h2>Sightings</h2>
+    <div class="cards">
+        {% for sighting in user.sightings.all %}
+        <div class="card">
+            <div class="card__header">
+                <a href="{% url 'license-plates-detail' sighting.license_plate.number %}"><h3>{{ sighting.license_plate.number }}</h3></a>
+            </div>
+            <hr>
+            <p><b>Seen On: </b>{{ sighting.seen_on }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock content %}
