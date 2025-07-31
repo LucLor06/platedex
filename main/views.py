@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 from .forms import RegisterForm, EmailVerificationForm, SetPasswordForm, LicensePlateNumberForm, LicensePlateImageValidationForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from .models import User, LicensePlate, LicensePlateSighting
 from django.contrib.auth.tokens import default_token_generator
@@ -119,3 +119,9 @@ def sightings_create(request: HttpRequest, license_plate_number: str):
         form = LicensePlateImageValidationForm()
     context = {'form': form, 'license_plate': license_plate}
     return render(request, 'plates/detail/sightings/add.html', context)
+
+@login_required
+def users_detail(request: HttpRequest, username: str):
+    user = get_object_or_404(User, username=username)
+    context = {'user': user}
+    return render(request, 'users/detail.html', context)
